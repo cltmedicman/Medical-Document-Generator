@@ -213,6 +213,13 @@
             line-height: 1.4;
         }
 
+        .heart-sound-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.3;
+            max-width: 150px;
+        }
+
         .text-muted {
             color: var(--text-muted) !important;
         }
@@ -385,11 +392,27 @@
                         </select>
                     </div>
                     <div class="col-md-7">
-                        <div class="d-flex flex-wrap gap-3 pt-1">
-                            <div class="form-check"><input class="form-check-input heart-sound" type="checkbox" value="S1"> <label class="form-check-label">S1</label></div>
-                            <div class="form-check"><input class="form-check-input heart-sound" type="checkbox" value="S2"> <label class="form-check-label">S2</label></div>
-                            <div class="form-check"><input class="form-check-input heart-sound" type="checkbox" value="S3"> <label class="form-check-label">S3</label></div>
-                            <div class="form-check"><input class="form-check-input heart-sound" type="checkbox" value="S4"> <label class="form-check-label">S4</label></div>
+                        <div class="d-flex flex-wrap gap-4 pt-1">
+                            <div class="form-check">
+                                <input class="form-check-input heart-sound" type="checkbox" value="S1" id="s1Check">
+                                <label class="form-check-label" for="s1Check">S1</label>
+                                <div class="heart-sound-desc">"Lub" — mitral/tricuspid closure</div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input heart-sound" type="checkbox" value="S2" id="s2Check">
+                                <label class="form-check-label" for="s2Check">S2</label>
+                                <div class="heart-sound-desc">"Dub" — aortic/pulmonic closure</div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input heart-sound" type="checkbox" value="S3" id="s3Check">
+                                <label class="form-check-label" for="s3Check">S3</label>
+                                <div class="heart-sound-desc">Early diastolic, ventricular gallop</div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input heart-sound" type="checkbox" value="S4" id="s4Check">
+                                <label class="form-check-label" for="s4Check">S4</label>
+                                <div class="heart-sound-desc">Late diastolic, atrial gallop</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -779,7 +802,10 @@
                 const timing = document.getElementById('breathSoundsTiming').value.toLowerCase();
                 const loc = document.getElementById('breathSoundsLocation').value;
                 let phrase = bSound === "Clear" ? `Breath sounds clear` : `${bSound} breath sounds`;
-                if (timing) phrase += ` ${timing}`;
+                if (timing) {
+                    const timingPhrase = timing === "both" ? "on inspiration and expiration" : `on ${timing}`;
+                    phrase += ` ${timingPhrase}`;
+                }
                 if (loc) phrase += ` in ${loc}`;
                 summaryParts.push(phrase + ".");
             }
