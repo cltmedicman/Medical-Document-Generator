@@ -9,11 +9,17 @@
     <style>
         :root {
             --primary: #0d6efd;
-            --accent: #198754;
+            --accent: #22c55e;
+            --bg: #0f172a;
+            --card: #1e2937;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: #334155;
         }
         
         body {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9f0f7 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
+            color: var(--text);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             padding: 20px 0;
             min-height: 100vh;
@@ -25,26 +31,28 @@
         }
         
         .header {
-            background: white;
+            background: var(--card);
             border-radius: 20px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             margin-bottom: 2rem;
             text-align: center;
+            border: 1px solid var(--border);
         }
         
         .logo {
             font-size: 2.5rem;
             font-weight: 700;
-            background: linear-gradient(90deg, #0d6efd, #198754);
+            background: linear-gradient(90deg, #60a5fa, #4ade80);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         .card {
-            border: none;
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             transition: transform 0.2s ease;
         }
@@ -54,54 +62,67 @@
         }
         
         .card-header {
+            background: #1e2937 !important;
+            border-bottom: 1px solid var(--border) !important;
             border-radius: 20px 20px 0 0 !important;
             padding: 1.25rem 1.75rem;
             font-weight: 600;
             font-size: 1.1rem;
+            color: white;
         }
         
         .btn-medical {
-            background: linear-gradient(135deg, var(--primary), #0b5ed7);
+            background: linear-gradient(135deg, var(--primary), #2563eb);
             border: none;
             border-radius: 50px;
             padding: 12px 32px;
             font-weight: 600;
             transition: all 0.3s ease;
+            color: white;
         }
         
         .btn-medical:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
         }
         
         .form-control, .form-select {
+            background-color: #334155;
+            color: var(--text);
             border-radius: 12px;
-            border: 2px solid #e9ecef;
+            border: 2px solid var(--border);
             padding: 12px 16px;
-            transition: all 0.2s ease;
         }
         
         .form-control:focus, .form-select:focus {
+            background-color: #334155;
+            color: var(--text);
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
+            box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25);
+        }
+        
+        .form-check-input {
+            background-color: #475569;
+            border-color: var(--border);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--accent);
+            border-color: var(--accent);
         }
         
         .input-group .btn {
             border-radius: 12px;
         }
         
-        .section-icon {
-            margin-right: 10px;
-            opacity: 0.9;
-        }
-        
         pre {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
+            background: #1e2937;
+            border: 1px solid var(--border);
             border-radius: 16px;
             padding: 1.5rem;
             font-size: 0.95rem;
             line-height: 1.6;
+            color: #e2e8f0;
             white-space: pre-wrap;
         }
         
@@ -110,36 +131,57 @@
         }
         
         .symptom-row:hover {
-            background-color: #f8f9fa;
+            background-color: #334155;
         }
         
         .modal-content {
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 20px;
+            color: var(--text);
         }
         
         .ice-option {
-            padding: 12px 16px;
+            background: #334155;
+            padding: 14px 18px;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
             border: 2px solid transparent;
+            margin-bottom: 8px;
+            color: var(--text);
         }
         
         .ice-option:hover {
-            background-color: #f0f4f8;
-            border-color: #d1e0ff;
+            background-color: #475569;
+            border-color: #60a5fa;
         }
         
         .ice-option.selected {
-            background-color: #e7f3ff;
-            border-color: var(--primary);
-            font-weight: 500;
+            background-color: #1e40af;
+            border-color: #3b82f6;
         }
         
         .score-display {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
             color: var(--accent);
+            line-height: 1;
+        }
+        
+        .ice-description {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+        
+        .btn-outline-info, .btn-outline-secondary {
+            border-color: var(--border);
+            color: var(--text);
         }
     </style>
 </head>
@@ -153,8 +195,8 @@
 
         <!-- General Communication -->
         <div class="card mb-4">
-            <div class="card-header bg-primary text-white d-flex align-items-center">
-                <i class="fas fa-comments section-icon"></i>
+            <div class="card-header d-flex align-items-center">
+                <i class="fas fa-comments section-icon me-2"></i>
                 General Communication
             </div>
             <div class="card-body">
@@ -214,7 +256,7 @@
         <!-- Specialty Assessments -->
         <div class="card mb-4">
             <div class="card-header bg-success text-white d-flex align-items-center">
-                <i class="fas fa-stethoscope section-icon"></i>
+                <i class="fas fa-stethoscope section-icon me-2"></i>
                 Specialty Assessments
             </div>
             <div class="card-body">
@@ -239,7 +281,7 @@
         <!-- Physical Assessment -->
         <div class="card mb-4">
             <div class="card-header bg-info text-white d-flex align-items-center">
-                <i class="fas fa-user-md section-icon"></i>
+                <i class="fas fa-user-md section-icon me-2"></i>
                 Physical Assessment
             </div>
             <div class="card-body">
@@ -247,7 +289,6 @@
                     <i class="fas fa-magic me-2"></i>Apply Normal Findings
                 </button>
 
-                <!-- Breath Sounds -->
                 <h5 class="mt-3 mb-3 text-muted">Breath Sounds</h5>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
@@ -280,7 +321,6 @@
                     </div>
                 </div>
 
-                <!-- Heart -->
                 <h5 class="mb-3 text-muted">Heart</h5>
                 <div class="row g-3 mb-4">
                     <div class="col-md-5">
@@ -300,7 +340,6 @@
                     </div>
                 </div>
 
-                <!-- Abdomen -->
                 <h5 class="mb-3 text-muted">Abdomen</h5>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
@@ -333,7 +372,6 @@
                     </div>
                 </div>
 
-                <!-- Edema -->
                 <h5 class="mb-3 text-muted">Edema</h5>
                 <div class="mb-4">
                     <div class="form-check mb-3">
@@ -354,7 +392,6 @@
                     </select>
                 </div>
 
-                <!-- Other -->
                 <div class="row g-4">
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Fontanelle</label>
@@ -394,7 +431,7 @@
         <!-- Symptoms -->
         <div class="card mb-4">
             <div class="card-header bg-warning text-dark d-flex align-items-center">
-                <i class="fas fa-clipboard-list section-icon"></i>
+                <i class="fas fa-clipboard-list section-icon me-2"></i>
                 Symptoms
             </div>
             <div class="card-body">
@@ -429,62 +466,105 @@
         </div>
     </div>
 
-    <!-- Improved ICE Score Modal -->
+    <!-- Enhanced ICE Score Modal -->
     <div class="modal fade" id="iceModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title fw-bold">
-                        <i class="fas fa-brain text-primary me-2"></i>ICE Score Calculator
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <div class="modal-header border-0 pb-2">
+                    <div>
+                        <h5 class="modal-title fw-bold mb-1">
+                            <i class="fas fa-brain text-primary me-2"></i>ICE Score (Immune Effector Cell-Associated Encephalopathy)
+                        </h5>
+                        <small class="text-muted">Standardized 10-point ICANS screening tool</small>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="text-center mb-4">
+                <div class="modal-body pt-2">
+                    <div class="text-center mb-4 p-3 bg-dark rounded-3">
                         <div class="score-display" id="liveScore">0</div>
-                        <small class="text-muted">/ 10 points • ICANS Screening</small>
+                        <small class="text-muted">Total ICE Score / 10</small>
                     </div>
 
                     <!-- Orientation -->
                     <div class="mb-4">
-                        <label class="form-label fw-semibold d-flex align-items-center">
-                            <span class="badge bg-primary me-2">4 pts</span> Orientation
-                        </label>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="badge bg-primary fs-6">4 points</span>
+                                <strong class="ms-2">Orientation</strong>
+                            </div>
+                            <small class="text-muted">Patient must correctly identify</small>
+                        </div>
                         <div class="row g-2" id="orientationChecks">
-                            <div class="col-6"><div class="ice-option" data-points="1">Year</div></div>
-                            <div class="col-6"><div class="ice-option" data-points="1">Month</div></div>
-                            <div class="col-6"><div class="ice-option" data-points="1">City</div></div>
-                            <div class="col-6"><div class="ice-option" data-points="1">Hospital</div></div>
+                            <div class="col-6">
+                                <div class="ice-option" data-points="1">
+                                    <strong>Year</strong>
+                                    <div class="ice-description">What is the current year?</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="ice-option" data-points="1">
+                                    <strong>Month</strong>
+                                    <div class="ice-description">What is the current month?</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="ice-option" data-points="1">
+                                    <strong>City</strong>
+                                    <div class="ice-description">What city are we in?</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="ice-option" data-points="1">
+                                    <strong>Hospital / Facility</strong>
+                                    <div class="ice-description">What is the name of this hospital/clinic?</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Naming -->
                     <div class="mb-4">
-                        <label class="form-label fw-semibold d-flex align-items-center">
-                            <span class="badge bg-primary me-2">3 pts</span> Naming (3 objects)
-                        </label>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="badge bg-primary fs-6">3 points</span>
+                                <strong class="ms-2">Naming</strong>
+                            </div>
+                            <small class="text-muted">Ask patient to name 3 common objects (e.g., pen, watch, button)</small>
+                        </div>
                         <div class="d-flex gap-2 flex-wrap" id="namingOptions">
-                            <div class="ice-option flex-grow-1 text-center" data-points="0">0 objects</div>
-                            <div class="ice-option flex-grow-1 text-center" data-points="1">1 object</div>
-                            <div class="ice-option flex-grow-1 text-center" data-points="2">2 objects</div>
-                            <div class="ice-option flex-grow-1 text-center" data-points="3">3 objects</div>
+                            <div class="ice-option flex-grow-1 text-center" data-points="0">0 objects named correctly</div>
+                            <div class="ice-option flex-grow-1 text-center" data-points="1">1 object named correctly</div>
+                            <div class="ice-option flex-grow-1 text-center" data-points="2">2 objects named correctly</div>
+                            <div class="ice-option flex-grow-1 text-center" data-points="3">3 objects named correctly</div>
                         </div>
                     </div>
 
-                    <!-- Other tasks -->
+                    <!-- Additional Tasks -->
                     <div>
-                        <label class="form-label fw-semibold d-flex align-items-center">
-                            <span class="badge bg-primary me-2">1 pt each</span> Additional Tasks
-                        </label>
-                        <div class="ice-option mb-2" data-points="1" id="followsCmd">Follows simple commands</div>
-                        <div class="ice-option mb-2" data-points="1" id="writesSent">Writes a sentence</div>
-                        <div class="ice-option" data-points="1" id="attention">Attention (100 → 0)</div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="badge bg-primary fs-6">1 point each</span>
+                                <strong class="ms-2">Additional Tasks</strong>
+                            </div>
+                        </div>
+                        <div class="ice-option" data-points="1" id="followsCmd">
+                            <strong>Follows Commands</strong>
+                            <div class="ice-description">Can the patient follow simple one-step commands? (e.g., “close your eyes”, “stick out your tongue”)</div>
+                        </div>
+                        <div class="ice-option" data-points="1" id="writesSent">
+                            <strong>Writes a Sentence</strong>
+                            <div class="ice-description">Can the patient write a complete, coherent sentence?</div>
+                        </div>
+                        <div class="ice-option" data-points="1" id="attention">
+                            <strong>Attention (100-0)</strong>
+                            <div class="ice-description">Can the patient count backwards from 100 by 10s? (100, 90, 80...)</div>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-secondary flex-grow-1" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success flex-grow-1" onclick="confirmIce()">
-                        <i class="fas fa-check me-2"></i>Save Score
+                <div class="modal-footer border-0 pt-2">
+                    <button type="button" class="btn btn-secondary px-5" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success px-5" onclick="confirmIce()">
+                        <i class="fas fa-check me-2"></i>Save ICE Score
                     </button>
                 </div>
             </div>
@@ -493,7 +573,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Symptom list
         const symptoms = ["denies any symptoms", "nausea", "vomiting", "diarrhea", "headache", "dizziness", "light-headedness", "general weakness", "tiredness"];
 
         let currentIceScore = 0;
@@ -524,46 +603,26 @@
                 container.appendChild(div);
             });
 
-            // ICE Modal interactivity
             setupIceModal();
         };
 
         function setupIceModal() {
-            // Orientation
-            document.querySelectorAll('#orientationChecks .ice-option').forEach(opt => {
+            document.querySelectorAll('.ice-option').forEach(opt => {
                 opt.addEventListener('click', () => {
-                    opt.classList.toggle('selected');
-                    updateLiveScore();
-                });
-            });
-
-            // Naming
-            document.querySelectorAll('#namingOptions .ice-option').forEach(opt => {
-                opt.addEventListener('click', () => {
-                    document.querySelectorAll('#namingOptions .ice-option').forEach(o => o.classList.remove('selected'));
-                    opt.classList.add('selected');
-                    selectedNaming = parseInt(opt.dataset.points);
-                    updateLiveScore();
-                });
-            });
-
-            // Other tasks
-            ['followsCmd', 'writesSent', 'attention'].forEach(id => {
-                const el = document.getElementById(id);
-                el.addEventListener('click', () => {
-                    el.classList.toggle('selected');
+                    if (opt.parentElement.id === 'namingOptions') {
+                        document.querySelectorAll('#namingOptions .ice-option').forEach(o => o.classList.remove('selected'));
+                        selectedNaming = parseInt(opt.dataset.points);
+                    } else {
+                        opt.classList.toggle('selected');
+                    }
                     updateLiveScore();
                 });
             });
         }
 
         function updateLiveScore() {
-            let score = selectedNaming;
-            
-            // Orientation (up to 4)
+            let score = selectedNaming || 0;
             score += document.querySelectorAll('#orientationChecks .ice-option.selected').length;
-            
-            // Additional tasks
             if (document.getElementById('followsCmd').classList.contains('selected')) score++;
             if (document.getElementById('writesSent').classList.contains('selected')) score++;
             if (document.getElementById('attention').classList.contains('selected')) score++;
@@ -573,22 +632,20 @@
         }
 
         function confirmIce() {
-            document.getElementById('iceScore').value = currentIceScore + "/10";
-            bootstrap.Modal.getInstance(document.getElementById('iceModal')).hide();
+            document.getElementById('iceScore').value = `${currentIceScore}/10`;
+            const modal = bootstrap.Modal.getInstance(document.getElementById('iceModal'));
+            modal.hide();
             
-            // Reset modal for next use
             setTimeout(() => {
                 document.querySelectorAll('.ice-option').forEach(el => el.classList.remove('selected'));
                 selectedNaming = 0;
                 currentIceScore = 0;
                 document.getElementById('liveScore').textContent = '0';
-            }, 500);
+            }, 600);
         }
 
         function toggleAbdAll(el) {
-            if (el.checked) {
-                document.querySelectorAll('.abd-loc').forEach(i => i.checked = false);
-            }
+            if (el.checked) document.querySelectorAll('.abd-loc').forEach(i => i.checked = false);
         }
 
         document.querySelectorAll('.abd-loc').forEach(i => {
@@ -606,7 +663,9 @@
 
         document.querySelectorAll('.edema-loc, #edemaScore').forEach(el => {
             el.addEventListener('change', () => {
-                if (el.checked || el.value) document.getElementById('noEdema').checked = false;
+                if ((el.type === 'checkbox' && el.checked) || (el.type === 'select-one' && el.value)) {
+                    document.getElementById('noEdema').checked = false;
+                }
             });
         });
 
@@ -615,9 +674,7 @@
             document.getElementById('breathSoundsTiming').value = "Both";
             document.getElementById('breathSoundsLocation').value = "all lung fields";
             document.getElementById('heartRhythm').value = "Regular";
-            document.querySelectorAll('.heart-sound').forEach(i => {
-                i.checked = (i.value === 'S1' || i.value === 'S2');
-            });
+            document.querySelectorAll('.heart-sound').forEach(i => i.checked = (i.value === 'S1' || i.value === 'S2'));
             document.getElementById('abdomenConsistency').value = "Soft";
             document.getElementById('abdomenTenderness').value = "Non-tender";
             document.getElementById('abd-all').checked = true;
@@ -625,7 +682,6 @@
             document.getElementById('noEdema').checked = true;
             toggleNoEdema(document.getElementById('noEdema'));
             
-            // Default symptom
             const firstSym = document.querySelector('input[name="denies any symptoms"][value="POSITIVE"]');
             if (firstSym) firstSym.checked = true;
         }
@@ -645,7 +701,6 @@
                 if (val) sb += `• ${labels[i]}: ${val}\n`;
             });
 
-            // Specialty
             const doppler = document.getElementById('dopplerMap').value.trim();
             const ice = document.getElementById('iceScore').value.trim();
             if (doppler || ice) {
@@ -654,14 +709,10 @@
                 if (ice) sb += `• ICE Score: ${ice}\n`;
             }
 
-            // Build summary
             let summaryParts = [];
-            
             const getSym = (s) => document.querySelector(`input[name="${s}"]:checked`)?.value || "NONE";
             
-            if (getSym(symptoms[0]) === "POSITIVE") {
-                summaryParts.push("The patient denies any symptoms.");
-            }
+            if (getSym(symptoms[0]) === "POSITIVE") summaryParts.push("The patient denies any symptoms.");
             
             const pos = symptoms.slice(1).filter(s => getSym(s) === "POSITIVE");
             const neg = symptoms.slice(1).filter(s => getSym(s) === "NEGATIVE");
@@ -669,20 +720,16 @@
             if (pos.length) summaryParts.push(`Reports: ${pos.join(', ')}.`);
             if (neg.length) summaryParts.push(`Denies: ${neg.join(', ')}.`);
 
-            // Breath sounds
             const bSound = document.getElementById('breathSounds').value;
             if (bSound) {
                 const timing = document.getElementById('breathSoundsTiming').value.toLowerCase();
                 const loc = document.getElementById('breathSoundsLocation').value;
-                let phrase = bSound === "Clear" ? 
-                    `Breath sounds clear` : 
-                    `${bSound} breath sounds`;
+                let phrase = bSound === "Clear" ? `Breath sounds clear` : `${bSound} breath sounds`;
                 if (timing) phrase += ` ${timing}`;
                 if (loc) phrase += ` in ${loc}`;
                 summaryParts.push(phrase + ".");
             }
 
-            // Heart
             const hRhythm = document.getElementById('heartRhythm').value;
             const hSounds = Array.from(document.querySelectorAll('.heart-sound:checked')).map(i => i.value);
             if (hRhythm || hSounds.length) {
@@ -692,7 +739,6 @@
                 summaryParts.push(heartStr + ".");
             }
 
-            // Abdomen
             const aCons = document.getElementById('abdomenConsistency').value;
             const aTend = document.getElementById('abdomenTenderness').value;
             const aLocs = Array.from(document.querySelectorAll('.abd-loc:checked')).map(i => i.value);
@@ -704,7 +750,6 @@
                 summaryParts.push(abdStr + ".");
             }
 
-            // Edema
             if (document.getElementById('noEdema').checked) {
                 summaryParts.push("No peripheral edema.");
             } else {
@@ -718,18 +763,13 @@
                 }
             }
 
-            // Fontanelle + Mucous
             const fT = document.getElementById('fontanelleTexture').value;
             const fS = document.getElementById('fontanelleShape').value;
-            if (fT || fS) {
-                summaryParts.push(`Fontanelle ${[fT, fS].filter(Boolean).join(', ')}.`);
-            }
+            if (fT || fS) summaryParts.push(`Fontanelle ${[fT, fS].filter(Boolean).join(', ')}.`);
 
             const mC = document.getElementById('mucousMembraneColor').value;
             const mM = document.getElementById('mucousMembraneMoisture').value;
-            if (mC || mM) {
-                summaryParts.push(`Mucous membranes ${[mC, mM].filter(Boolean).join(' and ')}.`);
-            }
+            if (mC || mM) summaryParts.push(`Mucous membranes ${[mC, mM].filter(Boolean).join(' and ')}.`);
 
             const custom = document.getElementById('summaryText').value.trim();
             if (custom) summaryParts.push(custom);
@@ -746,11 +786,10 @@
         function copyResult() {
             const text = document.getElementById('outputText').innerText;
             navigator.clipboard.writeText(text).then(() => {
-                const orig = event.target.innerHTML;
-                event.target.innerHTML = `<i class="fas fa-check me-2"></i>Copied!`;
-                setTimeout(() => {
-                    event.target.innerHTML = orig;
-                }, 2000);
+                const btn = event.currentTarget;
+                const orig = btn.innerHTML;
+                btn.innerHTML = `<i class="fas fa-check me-2"></i>Copied Successfully!`;
+                setTimeout(() => btn.innerHTML = orig, 2000);
             });
         }
     </script>
